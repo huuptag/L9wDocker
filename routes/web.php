@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\ChirpController;
 use Illuminate\Foundation\Application;
+use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -24,8 +26,15 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::group([
+    'middleware' => ['auth', 'verified']
+], function (Router $route) {
+    $route->get('/dashboard', function () {
+        return Inertia::render('Dashboard');
+    })->name('dashboard');
+
+    $route->resource('chirps', ChirpController::class)
+        ->only(['index', 'store', 'update', 'destroy']);
+});
 
 require __DIR__.'/auth.php';

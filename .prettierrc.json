@@ -1,0 +1,9 @@
+{
+    "singleQuote": true,
+    "trailingComma": "none",
+    "printWidth": 100,
+    "embeddedLanguageFormatting": "auto",
+    "endOfLine": "auto",
+    "singleAttributePerLine": true,
+    "useTabs": true
+}
